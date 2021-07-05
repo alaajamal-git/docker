@@ -31,7 +31,7 @@ public class MainController {
 	@GetMapping("/storage/{fileName}")
 	public ResponseEntity<String> featchFileService(@PathVariable String fileName){
 		List<String> content = CreateFileService.getDetails(fileName);
-		return new ResponseEntity<String>(content.toString()+" last!",HttpStatus.OK);
+		return new ResponseEntity<String>(content.toString(),HttpStatus.OK);
 	}
 	
 	
