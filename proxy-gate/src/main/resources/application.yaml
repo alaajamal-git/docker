@@ -1,0 +1,21 @@
+server:
+  port: ${PORT:8011}
+spring:  application:    name: proxy
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+           - id: service1
+             uri: lb://service1
+             predicates:
+              - Path=/control/add
+          
+eureka:
+  client:
+    serviceUrl:      defaultZone:
+        http://localhost:8010/eureka
+  
+    
