@@ -1,12 +1,10 @@
 server:
-  port: ${PORT:8010}
+  port: ${PORT:0}
 spring:
   application:
     name: service1
 eureka:
   client:
-    registerWithEureka: false
-    fetchRegistry: false
     serviceUrl:
-      defaultZone: http://localhost:8010/eureka
-      
+      defaultZone:
+        http://eureka:8010/eureka

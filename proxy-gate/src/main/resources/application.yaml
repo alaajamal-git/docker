@@ -16,6 +16,6 @@ spring:  application:    name: proxy
 eureka:
   client:
     serviceUrl:      defaultZone:
-        http://localhost:8010/eureka
+        http://eureka:8010/eureka
   
     

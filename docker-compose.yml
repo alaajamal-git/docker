@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  eureka-registry:
+    build:
+      context: ./eureka_registry
+      dockerfile: Dockerfile
+    image: eureka
+    container_name: eureka
+    volumes:
+      - "C:/Users/lenovo/Documents/workspace-spring-tool-suite-4-4.11.0.RELEASE/eureka_registry:/app"
+    networks:
+      - docker
+    expose:
+      - "8010"
+    ports:
+      - "3000:8010"
+  proxy-gate:
+    build:
+      context: ./proxy-gate
+      dockerfile: Dockerfile
+    image: proxy
+    container_name: proxy
+    volumes:
+      - type: bind
+        source: ./proxy-gate
+        target: /app
+    ports:
+      - "3001:8011"
+    networks:
+      - docker
+    #depends on specify the services that should be run before this service
+    depends_on:
+      - eureka-registry
+  service1:
+    build:
+      context: ./eureka_registry
+      dockerfile: Dockerfile
+    image: service1
+    volumes:
+      - type: bind
+        source: C:\Users\lenovo\Documents\workspace-spring-tool-suite-4-4.11.0.RELEASE\service1
+        #or source: ./service1
+        target: /app
+    networks:
+      - docker
+    depends_on:
+      - eureka-registry
+#for named volumes
+volumes:
+  data:
+networks:
+  docker:
+# docker-compose up (this command to run docker compose to build images and run containers)
+# docker-compose down -v (this command stops all containers and remove them with their volumes)
+# to enforce docker compose to rebuild images (docekr-compose up --build)
+# to scale or run multi instance of the service "container" (docker-compose up --scale serviceName=numberOfinstances)
