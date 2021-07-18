@@ -50,6 +50,7 @@ volumes:
   data:
 networks:
   docker:
+    name: docker
 # docker-compose up (this command to run docker compose to build images and run containers)
 # docker-compose down -v (this command stops all containers and remove them with their volumes)
 # to enforce docker compose to rebuild images (docekr-compose up --build)
